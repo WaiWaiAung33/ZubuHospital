@@ -31,6 +31,7 @@ export default class Login extends React.Component {
               style={styles.textInput}
               placeholder="Enter password"
               placeholderTextColor="black"
+              secureTextEntry={true}
             />
             <TouchableOpacity
               onPress={() =>
