@@ -129,9 +129,9 @@ const styles = StyleSheet.create({
     borderBottomColor: "#DDDDDF",
   },
   img: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
   },
   imageContainer: {
     marginTop: 40,
