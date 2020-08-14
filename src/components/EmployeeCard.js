@@ -1,26 +1,25 @@
 import React from "react";
-import { View, Text, StyleSheet} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 //import components
 import ActionPopupmenu from "@components/Actionpopupmenu";
 
 const ACTION_POPUP_DATA = [
-  {label:"View",action:"VIEW"},
-    { label: "Edit", action: "EDIT" },
-    { label: "Delete", action: "DELETE" },
-  
-  ];
+  { label: "View", action: "VIEW" },
+  { label: "Edit", action: "EDIT" },
+  { label: "Delete", action: "DELETE" },
+];
 
 export default class EmployeeCard extends React.Component {
-    _handleOnSelectActionPopup(arrIndex, action) {
-        if (action == "EDIT") {
-          this.props.onPressEdit(arrIndex);
-        } else if (action == "DELETE") {
-          this.props.onPressDelete(arrIndex);
-        }else if(action == "VIEW"){
-          this.props.onPressView(arrIndex);
-        }
-      }
+  _handleOnSelectActionPopup(arrIndex, action) {
+    if (action == "EDIT") {
+      this.props.onPressEdit(arrIndex);
+    } else if (action == "DELETE") {
+      this.props.onPressDelete(arrIndex);
+    } else if (action == "VIEW") {
+      this.props.onPressView(arrIndex);
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -29,41 +28,42 @@ export default class EmployeeCard extends React.Component {
           <View style={{ width: "40%" }}>
             <Text style={[styles.text, { fontWeight: "bold" }]}>Name</Text>
             <Text style={[styles.text, { fontWeight: "bold" }]}>Position</Text>
-            <Text style={[styles.text, { fontWeight: "bold" }]}>Department</Text>
+            <Text style={[styles.text, { fontWeight: "bold" }]}>
+              Department
+            </Text>
             {/* <Text style={[styles.text, { fontWeight: "bold" }]}>Serial No</Text> */}
             <Text style={[styles.text, { fontWeight: "bold" }]}>Phone No:</Text>
             {/* <Text style={[styles.text, { fontWeight: "bold" }]}>Model</Text> */}
           </View>
           <View style={{ width: "60%" }}>
-            <Text style={styles.text}>Dr. Maung Maung</Text>
-            <Text style={styles.text}>Doctor</Text>
-            <Text style={styles.text}>Department 1</Text>
+            <Text style={styles.text}>{this.props.name}</Text>
+            <Text style={styles.text}>{this.props.position}</Text>
+            <Text style={styles.text}>{this.props.department}</Text>
             {/* <Text style={styles.text}>{this.props.serialno}</Text> */}
-            <Text style={styles.text}>09 4567636353</Text>
+            <Text style={styles.text}>{this.props.phone}</Text>
             {/* <Text style={styles.text}>{this.props.model}</Text> */}
           </View>
         </View>
-        <View style={{alignItems:"flex-end"}}>
-        <ActionPopupmenu
+        <View style={{ alignItems: "flex-end" }}>
+          <ActionPopupmenu
             arrIndex={this.props.arrIndex}
             options={ACTION_POPUP_DATA}
             onSelect={this._handleOnSelectActionPopup.bind(this)}
           />
-        {/* <TouchableOpacity style={styles.touchBtn}>
+          {/* <TouchableOpacity style={styles.touchBtn}>
             <Image source={require("@images/setting.png")} style={styles.img}/>
             <Text style={styles.btnText}>Action</Text>
         </TouchableOpacity> */}
         </View>
-       
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop:5,
-    marginLeft:10,
-    marginRight:10,
+    marginTop: 5,
+    marginLeft: 10,
+    marginRight: 10,
     borderWidth: 1,
     borderRadius: 5,
     borderColor: "#707070",
@@ -80,23 +80,23 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "right",
   },
-  touchBtn:{
-      flexDirection:"row",
-      width:90,
-      height:35,
-      borderWidth:1,
-      borderRadius:5,
-      borderColor:"#1FD449",
-      backgroundColor:"#1FD449",
-      alignItems:"center",
-      padding:5
+  touchBtn: {
+    flexDirection: "row",
+    width: 90,
+    height: 35,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: "#1FD449",
+    backgroundColor: "#1FD449",
+    alignItems: "center",
+    padding: 5,
   },
-  img:{
-      width:20,
-      height:20,
+  img: {
+    width: 20,
+    height: 20,
   },
-  btnText:{
-      color:"#ffffff",
-      paddingLeft:5
-  }
+  btnText: {
+    color: "#ffffff",
+    paddingLeft: 5,
+  },
 });

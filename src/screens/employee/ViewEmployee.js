@@ -74,6 +74,9 @@ export default class ViewEmployee extends React.Component {
     });
   }
   render() {
+    // console.log("Employee",this.props.navigation.getParam("data"));
+    let data = this.props.navigation.getParam("data");
+    let nrc=data.nrc_code_en + "/" + data.nrc_status_en + "/" + "(N)" +"/"+data.nrc_en_no;
     return (
       <View style={styles.container}>
         <Header
@@ -88,7 +91,34 @@ export default class ViewEmployee extends React.Component {
                 <Text>Name</Text>
               </View>
               <View style={styles.textInput}>
-                <TextInput />
+                <Text>{data.name_mm}</Text>
+              </View>
+            </View>
+
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>Father Name   </Text>
+              </View>
+              <View style={styles.textInput}>
+                <Text>{data.father_mm}</Text>
+              </View>
+            </View>
+
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>DOB </Text>
+              </View>
+              <View style={styles.textInput}>
+                <Text>{data.birth}</Text>
+              </View>
+            </View>
+
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>Mail </Text>
+              </View>
+              <View style={styles.textInput}>
+                <Text>{data.email}</Text>
               </View>
             </View>
 
@@ -96,15 +126,8 @@ export default class ViewEmployee extends React.Component {
               <View style={styles.text}>
                 <Text>Position</Text>
               </View>
-              <View style={{ flex: 1 }}>
-                <DropDown
-                  value={this.state.position}
-                  options={POSITION}
-                  widthContainer="100%"
-                  onSelect={(value, label) =>
-                    this._handleOnSlectPosition(value, label)
-                  }
-                />
+              <View style={styles.textInput}>
+                <Text>{data.designation.designation}</Text>
               </View>
             </View>
 
@@ -112,15 +135,17 @@ export default class ViewEmployee extends React.Component {
               <View style={styles.text}>
                 <Text>Department</Text>
               </View>
-              <View style={{ flex: 1 }}>
-                <DropDown
-                  value={this.state.department}
-                  options={DEPARTMENT}
-                  widthContainer="100%"
-                  onSelect={(value, label) =>
-                    this._handleOnSelectDepartment(value, label)
-                  }
-                />
+              <View style={styles.textInput}>
+                <Text>{data.department.department}</Text>
+              </View>
+            </View>
+
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>Education</Text>
+              </View>
+              <View style={styles.textInput}>
+                <Text>{data.education}</Text>
               </View>
             </View>
 
@@ -129,7 +154,7 @@ export default class ViewEmployee extends React.Component {
                 <Text>Phone No</Text>
               </View>
               <View style={styles.textInput}>
-                <TextInput keyboardType="phone-pad" />
+                <Text>{data.ph_no}</Text>
               </View>
             </View>
 
@@ -172,7 +197,7 @@ export default class ViewEmployee extends React.Component {
                 <Text>NRC</Text>
               </View>
               <View style={styles.textInput}>
-                <TextInput/>
+          <Text>{nrc}</Text>
               </View>
             </View>
 
@@ -181,10 +206,10 @@ export default class ViewEmployee extends React.Component {
                 <Text>Address</Text>
               </View>
               <View style={styles.textArea}>
-                <TextInput editable={false}/>
+          <TextInput editable={false} >{data.address}</TextInput>
               </View>
             </View>
-{/* 
+            {/* 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
                 <Text></Text>
@@ -211,7 +236,6 @@ export default class ViewEmployee extends React.Component {
                 </View>
               </View>
             </View> */}
-
           </View>
         </ScrollView>
       </View>
@@ -259,14 +283,14 @@ const styles = StyleSheet.create({
     borderColor: "#F2EAEA",
     borderRadius: 5,
   },
-  textArea:{
+  textArea: {
     borderWidth: 1,
     width: "60%",
-    minHeight:80,
+    minHeight: 80,
     // padding: 5,
     borderRadius: 5,
     borderColor: "#ffffff",
     backgroundColor: "#ffffff",
-    paddingHorizontal:10
-  }
+    paddingHorizontal: 10,
+  },
 });

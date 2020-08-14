@@ -5,16 +5,58 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  AsyncStorage
 } from "react-native";
 
 //import components
 import Header from "@components/Header";
+import SuccessModal from "@components/SuccessModal";
+
+//import api
+const axios = require("axios");
+import {DepartmentApi} from "@api/Url";
 
 export default class CreateDepartment extends React.Component {
   constructor(props) {
     super(props);
+    this.state={
+      id:"",
+      name:"",
+      access_token:null,
+      isOpenSuccessModel:false
+    }
+  }
+  async componentDidMount(){
+    const access_token = await AsyncStorage.getItem("access_token");
+    this.setState({access_token:access_token});
+    let data=this.props.navigation.getParam("data");
+    this.setState({id:data.id,name:data.department})
   }
   _handleOnPress() {
+    this.props.navigation.navigate("Department");
+  }
+  _handleUpdate(){
+    const self=this;
+    let bodyParam = {
+      department:self.state.name
+    }
+    let url=DepartmentApi + "/" +self.state.id;
+    axios
+    .post(url,bodyParam,{
+      headers:{
+        Accept: "application/json",
+        Authorization: "Bearer " + self.state.access_token,
+      }
+    })
+    .then(function(response){
+     self.setState({isOpenSuccessModel:true})
+    })
+    .catch(function(err){
+      console.log(err);
+    })
+  }
+  _handleOnClose(){
+    this.setState({isOpenSuccessModel:false});
     this.props.navigation.navigate("Department");
   }
 
@@ -28,12 +70,23 @@ export default class CreateDepartment extends React.Component {
         />
         {/* <View style={{marginTop:30}}> */}
         <Text style={{ margin: 10, fontSize: 16 }}>Department name</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput 
+        value={this.state.name}
+        style={styles.textInput} 
+        onChangeText={(value)=>this.setState({name:value})}
+        />
         <View style={styles.touchContainer}>
-          <TouchableOpacity style={styles.touchBtn}>
+          <TouchableOpacity 
+          onPress={()=>this._handleUpdate()}
+          style={styles.touchBtn}>
             <Text style={{ color: "white", fontSize: 16 }}>Update</Text>
           </TouchableOpacity>
         </View>
+        <SuccessModal
+          isOpen={this.state.isOpenSuccessModel}
+          text="Department update Successfully"
+          onClose={() => this._handleOnClose()}
+        />
         {/* </View> */}
       </View>
     );
