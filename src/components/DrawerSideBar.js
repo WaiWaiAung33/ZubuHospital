@@ -12,7 +12,7 @@ import {
 const DRAWER_ITEMS = [
   {
     routeName: "Position",
-    label: "Position",
+    label: "Designation",
     image: require("@images/change.png"),
   },
   {

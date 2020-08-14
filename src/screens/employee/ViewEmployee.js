@@ -133,7 +133,7 @@ export default class ViewEmployee extends React.Component {
               </View>
             </View>
 
-            <View style={styles.secondConatiner}>
+            {/* <View style={styles.secondConatiner}>
               <View style={styles.text}>
                 <Text>NRC</Text>
               </View>
@@ -165,8 +165,26 @@ export default class ViewEmployee extends React.Component {
                   />
                 </View>
               </View>
+            </View> */}
+
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>NRC</Text>
+              </View>
+              <View style={styles.textInput}>
+                <TextInput/>
+              </View>
             </View>
 
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>Address</Text>
+              </View>
+              <View style={styles.textArea}>
+                <TextInput editable={false}/>
+              </View>
+            </View>
+{/* 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
                 <Text></Text>
@@ -192,7 +210,7 @@ export default class ViewEmployee extends React.Component {
                   <TextInput style={styles.nrcTextInput} />
                 </View>
               </View>
-            </View>
+            </View> */}
 
           </View>
         </ScrollView>
@@ -241,4 +259,14 @@ const styles = StyleSheet.create({
     borderColor: "#F2EAEA",
     borderRadius: 5,
   },
+  textArea:{
+    borderWidth: 1,
+    width: "60%",
+    minHeight:80,
+    // padding: 5,
+    borderRadius: 5,
+    borderColor: "#ffffff",
+    backgroundColor: "#ffffff",
+    paddingHorizontal:10
+  }
 });

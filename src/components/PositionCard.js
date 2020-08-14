@@ -19,21 +19,21 @@ export default class PositionCard extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.secondContainer}>
+        {/* <View style={styles.secondContainer}>
           <Text>No</Text>
           <Text>Position Name</Text>
           <Text>Action</Text>
-        </View>
+        </View> */}
         <View style={[styles.secondContainer, { marginTop: 15 }]}>
-          <Text style={[styles.text, { fontWeight: "bold" }]}>1</Text>
-          <Text style={styles.text}>Doctor</Text>
+       <Text style={[styles.text, { fontWeight: "bold" }]}>{this.props.No}</Text>
+          <Text style={styles.text}>{this.props.name}</Text>
           <Actionpopupmenu
             arrIndex={this.props.arrIndex}
             options={ACTION_POPUP_DATA}
             onSelect={this._handleOnSelectActionPopup.bind(this)}
           />
         </View>
-        <View style={[styles.secondContainer, { marginTop: 15 }]}>
+        {/* <View style={[styles.secondContainer, { marginTop: 15 }]}>
           <Text style={[styles.text, { fontWeight: "bold" }]}>2</Text>
           <Text style={styles.text}>Doctor</Text>
           <Actionpopupmenu
@@ -41,7 +41,7 @@ export default class PositionCard extends React.Component {
             options={ACTION_POPUP_DATA}
             onSelect={this._handleOnSelectActionPopup.bind(this)}
           />
-        </View>
+        </View> */}
       </View>
     );
   }
