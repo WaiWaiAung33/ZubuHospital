@@ -51,7 +51,7 @@ export default class Login extends React.Component {
             },
           })
           .then(function (response) {
-            // console.log("Role",response.data.data.employee[0].photo);
+            // console.log("Role",response.data);
             if (response.data.status == 1) {
              
               var role_id = response.data.data.role_id.toString();
@@ -79,8 +79,8 @@ export default class Login extends React.Component {
                 address=response.data.data.employee[0].address;
                 name_en=response.data.data.employee[0].name_en;
                 photo=response.data.data.employee[0].photo;  
-                department= response.data.data.employee[0].department;
-                designation= response.data.data.employee[0].designation;
+                department= response.data.data.employee[0].department.department;
+                designation= response.data.data.employee[0].designation.designation;
 
               }
               // var employee='';
@@ -106,6 +106,9 @@ export default class Login extends React.Component {
                   ["phone",phone],
                   ["address",address],
                   ["name_en",name_en],
+                  ["photo",photo],
+                  ["department",department],
+                  ["designation",designation],
                 ],
                 (err) => {
                   if (err) {

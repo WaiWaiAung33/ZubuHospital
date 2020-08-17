@@ -38,6 +38,8 @@ export default class Profile extends React.Component {
       address:"",
       photo:"",
       name_en:"",
+      department:"",
+      designation:""
     };
   }
   async componentDidMount() {
@@ -51,6 +53,8 @@ export default class Profile extends React.Component {
     const address = await AsyncStorage.getItem("address");
     const photo = await AsyncStorage.getItem("photo");
     const name_en =await AsyncStorage.getItem("name_en");
+    const department = await AsyncStorage.getItem("department");
+    const designation =await AsyncStorage.getItem("designation");
     this.setState({
       user_id: user_id,
       nrccode,
@@ -61,7 +65,9 @@ export default class Profile extends React.Component {
       phone,
       address,
       photo:photo,
-      name_en
+      name_en,
+      department,
+      designation
     });
   }
   async navigate(routename) {
@@ -99,27 +105,27 @@ export default class Profile extends React.Component {
                   justifyContent: "center",
                 }}
               >
-                  {/* {data.photo ? (
-                <View style={{ width: "60%" }}>
+                  {this.state.photo ? (
+                <View>
                   <Image
                     source={{
-                      uri: ImgUploadApi + "/" + data.name_en + "/" + data.photo,
+                      uri: ImgUploadApi + "/" + this.state.name_en + "/" + this.state.photo,
                     }}
                     style={{ width: 100, height: 100, borderRadius: 50 }}
                   />
                 </View>
               ) : (
-                <View style={{ width: "60%" }}>
+                <View>
                   <Image
-                    source={{ uri: ImgUploadApi + "/" + data.photo }}
-                    style={{ width: 100, height: 100, backgroundColor: "red" }}
+                   source={require("@images/people.jpg")}
+                   style={{ width: 100, height: 100, borderRadius: 50 }}
                   />
                 </View>
-              )} */}
-                <Image
+              )}
+                {/* <Image
                   source={require("@images/people.jpg")}
                   style={{ width: 100, height: 100, borderRadius: 50 }}
-                />
+                /> */}
                 {/* <TouchableOpacity
                   activeOpacity={0.7}
                   style={styles.qrcodeBox}
@@ -136,8 +142,8 @@ export default class Profile extends React.Component {
               </View>
 
               <Text style={styles.text}>{this.state.name}</Text>
-              <Text style={styles.text}>Doctor</Text>
-              <Text style={styles.text}>Department 1</Text>
+              <Text style={styles.text}>{this.state.designation}</Text>
+              <Text style={styles.text}>{this.state.department}</Text>
               <Text style={styles.text}>{this.state.phone}</Text>
               <Text style={styles.text}>
                 {this.state.nrccode +

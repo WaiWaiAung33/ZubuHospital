@@ -8,6 +8,9 @@ import {
   Image,
 } from "react-native";
 
+//import api
+import { ImgUploadApi } from "@api/Url";
+
 export default class DashboardDepartment extends React.Component {
   constructor(props) {
     super(props);
@@ -20,6 +23,10 @@ export default class DashboardDepartment extends React.Component {
       name: "",
       phone: "",
       address: "",
+      photo: "",
+      name_en: "",
+      department: "",
+      designation: "",
     };
   }
   async componentDidMount() {
@@ -31,6 +38,10 @@ export default class DashboardDepartment extends React.Component {
     const name = await AsyncStorage.getItem("name");
     const phone = await AsyncStorage.getItem("phone");
     const address = await AsyncStorage.getItem("address");
+    const photo = await AsyncStorage.getItem("photo");
+    const name_en = await AsyncStorage.getItem("name_en");
+    const department = await AsyncStorage.getItem("department");
+    const designation = await AsyncStorage.getItem("designation");
     this.setState({
       roleid,
       nrccode,
@@ -40,6 +51,10 @@ export default class DashboardDepartment extends React.Component {
       name,
       phone,
       address,
+      photo: photo,
+      name_en,
+      department,
+      designation,
     });
   }
   render() {
@@ -48,7 +63,7 @@ export default class DashboardDepartment extends React.Component {
       <View>
         {this.state.roleid == "1" ? (
           <View style={styles.container}>
-            <View style={{justifyContent:"center",alignItems:"center"}}>
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
               <Text>Department 1</Text>
               <View
                 style={{
@@ -65,7 +80,7 @@ export default class DashboardDepartment extends React.Component {
                 <Text style={styles.textdep}>20</Text>
               </View>
             </View>
-            <View style={{justifyContent:"center",alignItems:"center"}}>
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
               <Text>Department 1</Text>
               <View
                 style={{
@@ -100,15 +115,33 @@ export default class DashboardDepartment extends React.Component {
                     justifyContent: "center",
                   }}
                 >
-                  <Image
-                    source={require("@images/people.jpg")}
-                    style={{ width: 100, height: 100, borderRadius: 50 }}
-                  />
+                  {this.state.photo ? (
+                    <View>
+                      <Image
+                        source={{
+                          uri:
+                            ImgUploadApi +
+                            "/" +
+                            this.state.name_en +
+                            "/" +
+                            this.state.photo,
+                        }}
+                        style={{ width: 100, height: 100, borderRadius: 50 }}
+                      />
+                    </View>
+                  ) : (
+                    <View>
+                      <Image
+                        source={require("@images/people.jpg")}
+                        style={{ width: 100, height: 100, borderRadius: 50 }}
+                      />
+                    </View>
+                  )}
                 </View>
 
                 <Text style={styles.text}>{this.state.name}</Text>
-                <Text style={styles.text}>Doctor</Text>
-                <Text style={styles.text}>Department 1</Text>
+                <Text style={styles.text}>{this.state.designation}</Text>
+                <Text style={styles.text}>{this.state.department}</Text>
                 <Text style={styles.text}>{this.state.phone}</Text>
                 <Text style={styles.text}>
                   {" "}
@@ -208,8 +241,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginRight: 15,
   },
-  textdep:{
-    color:"#ffffff",
-    fontSize:18
-  }
+  textdep: {
+    color: "#ffffff",
+    fontSize: 18,
+  },
 });

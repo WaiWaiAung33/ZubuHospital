@@ -15,6 +15,9 @@ import * as Permissions from "expo-permissions";
 import QRCodeModalView from "@components/QRCodeModalView";
 import SuccessModal from "@components/SuccessModal";
 
+//import api
+import { ImgUploadApi } from "@api/Url";
+
 const DRAWER_ITEMS = [
   {
     routeName: "Position",
@@ -80,12 +83,16 @@ export default class DrawerSideBar extends React.Component {
       roleid: "",
       name: "",
       phone: "",
+      photo: "",
+      name_en: "",
     };
   }
   async componentDidMount() {
     const roleid = await AsyncStorage.getItem("role_id");
     const user_id = await AsyncStorage.getItem("employeeId");
     const name = await AsyncStorage.getItem("name");
+    const photo = await AsyncStorage.getItem("photo");
+    const name_en = await AsyncStorage.getItem("name_en");
     // console.log(name);
     const phone = await AsyncStorage.getItem("loginId");
     this.setState({
@@ -93,6 +100,8 @@ export default class DrawerSideBar extends React.Component {
       roleid: roleid,
       name: name,
       phone: phone,
+      photo: photo,
+      name_en,
     });
   }
   // async navigate(routename) {
@@ -165,10 +174,32 @@ export default class DrawerSideBar extends React.Component {
                     : this.props.navigation.navigate("Profile")
                 }
               >
-                <Image
+                {this.state.photo ? (
+                  <View>
+                    <Image
+                      source={{
+                        uri:
+                          ImgUploadApi +
+                          "/" +
+                          this.state.name_en +
+                          "/" +
+                          this.state.photo,
+                      }}
+                      style={{ width: 100, height: 100, borderRadius: 50 }}
+                    />
+                  </View>
+                ) : (
+                  <View>
+                    <Image
+                      source={require("@images/people.jpg")}
+                      style={{ width: 100, height: 100, borderRadius: 50 }}
+                    />
+                  </View>
+                )}
+                {/* <Image
                   source={require("@images/people.jpg")}
                   style={styles.img}
-                />
+                /> */}
               </TouchableOpacity>
               {this.state.roleid == "1" ? null : (
                 <TouchableOpacity
