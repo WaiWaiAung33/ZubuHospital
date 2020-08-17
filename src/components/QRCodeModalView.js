@@ -65,15 +65,15 @@ export default class QRCodeModalView extends React.Component {
               </TouchableOpacity>
             </View>
             <View style={styles.qrCodeWrapper}>
-              {/* {this.props.userID ? ( */}
+              {this.props.userID ? (
               <QRCode
-                // content={this.props.userID}
+                content={this.props.userID}
                 codeStyle="square"
                 size={200}
                 // logo={require("@icons/logos/Logo.png")}
                 // linearGradient={["#00807E", "#3BC6C3"]}
               />
-              {/* ) : null} */}
+             ) : null} 
             </View>
           </View>
         </View>

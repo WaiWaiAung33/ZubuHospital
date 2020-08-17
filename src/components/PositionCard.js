@@ -27,11 +27,11 @@ export default class PositionCard extends React.Component {
         <View style={[styles.secondContainer, { marginTop: 15 }]}>
        <Text style={[styles.text, { fontWeight: "bold" }]}>{this.props.No}</Text>
           <Text style={styles.text}>{this.props.name}</Text>
-          <Actionpopupmenu
+          {/* <Actionpopupmenu
             arrIndex={this.props.arrIndex}
             options={ACTION_POPUP_DATA}
             onSelect={this._handleOnSelectActionPopup.bind(this)}
-          />
+          /> */}
         </View>
         {/* <View style={[styles.secondContainer, { marginTop: 15 }]}>
           <Text style={[styles.text, { fontWeight: "bold" }]}>2</Text>
@@ -63,9 +63,10 @@ const styles = StyleSheet.create({
   secondContainer: {
     // flex:1,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent:"space-between",
     borderBottomWidth:1,
     paddingBottom:10,
+
   },
   dateText: {
     fontWeight: "bold",

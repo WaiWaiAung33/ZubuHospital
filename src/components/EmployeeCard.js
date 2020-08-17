@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 //import components
 import ActionPopupmenu from "@components/Actionpopupmenu";
@@ -20,48 +20,61 @@ export default class EmployeeCard extends React.Component {
       this.props.onPressView(arrIndex);
     }
   }
+  _onPress() {
+    if (this.props.Onpress) {
+      this.props.Onpress();
+    }
+  }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.dateText}>1.1.2020</Text>
-        <View style={styles.secondContainer}>
-          <View style={{ width: "40%" }}>
-            <Text style={[styles.text, { fontWeight: "bold" }]}>Name</Text>
-            <Text style={[styles.text, { fontWeight: "bold" }]}>Position</Text>
-            <Text style={[styles.text, { fontWeight: "bold" }]}>
-              Department
-            </Text>
-            {/* <Text style={[styles.text, { fontWeight: "bold" }]}>Serial No</Text> */}
-            <Text style={[styles.text, { fontWeight: "bold" }]}>Phone No:</Text>
-            {/* <Text style={[styles.text, { fontWeight: "bold" }]}>Model</Text> */}
-          </View>
-          <View style={{ width: "60%" }}>
-            <Text style={styles.text}>{this.props.name}</Text>
-            <Text style={styles.text}>{this.props.position}</Text>
-            <Text style={styles.text}>{this.props.department}</Text>
-            {/* <Text style={styles.text}>{this.props.serialno}</Text> */}
-            <Text style={styles.text}>{this.props.phone}</Text>
-            {/* <Text style={styles.text}>{this.props.model}</Text> */}
-          </View>
-        </View>
-        <View style={{ alignItems: "flex-end" }}>
-          <ActionPopupmenu
+      <View>
+        <TouchableOpacity onPress={() => this._onPress()}>
+          <View style={styles.container}>
+            <Text style={styles.dateText}>{this.props.date}</Text>
+            <View style={styles.secondContainer}>
+              <View style={{ width: "40%" }}>
+                <Text style={[styles.text, { fontWeight: "bold" }]}>Name</Text>
+                <Text style={[styles.text, { fontWeight: "bold" }]}>
+                  Position
+                </Text>
+                <Text style={[styles.text, { fontWeight: "bold" }]}>
+                  Department
+                </Text>
+                {/* <Text style={[styles.text, { fontWeight: "bold" }]}>Serial No</Text> */}
+                <Text style={[styles.text, { fontWeight: "bold" }]}>
+                  Phone No:
+                </Text>
+                {/* <Text style={[styles.text, { fontWeight: "bold" }]}>Model</Text> */}
+              </View>
+              <View style={{ width: "60%" }}>
+                <Text style={styles.text}>{this.props.name}</Text>
+                <Text style={styles.text}>{this.props.position}</Text>
+                <Text style={styles.text}>{this.props.department}</Text>
+                {/* <Text style={styles.text}>{this.props.serialno}</Text> */}
+                <Text style={styles.text}>{this.props.phone}</Text>
+                {/* <Text style={styles.text}>{this.props.model}</Text> */}
+              </View>
+            </View>
+            <View style={{ alignItems: "flex-end" }}>
+              {/* <ActionPopupmenu
             arrIndex={this.props.arrIndex}
             options={ACTION_POPUP_DATA}
             onSelect={this._handleOnSelectActionPopup.bind(this)}
-          />
-          {/* <TouchableOpacity style={styles.touchBtn}>
+          /> */}
+              {/* <TouchableOpacity style={styles.touchBtn}>
             <Image source={require("@images/setting.png")} style={styles.img}/>
             <Text style={styles.btnText}>Action</Text>
         </TouchableOpacity> */}
-        </View>
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 5,
+    marginTop: 15,
     marginLeft: 10,
     marginRight: 10,
     borderWidth: 1,

@@ -17,6 +17,7 @@ import { Camera } from "expo-camera";
 export default class ExpoScanner extends React.Component {
   constructor(props) {
     super(props);
+    this.onBarCodeRead = this.onBarCodeRead.bind(this);
     this.renderMessage = this.renderMessage.bind(this);
     this.BackHandler = null;
 
@@ -41,6 +42,25 @@ export default class ExpoScanner extends React.Component {
     this.props.navigation.navigate("HDashboardNavigator");
     return true;
   };
+
+  onBarCodeRead({ type, data }) {
+    if (
+      (type === this.state.scannedItem.type &&
+        data === this.state.scannedItem.data) ||
+      data === null
+    ) {
+      return;
+    }
+
+    Vibration.vibrate();
+    this.setState({ scannedItem: { data, type } });
+
+    if (data) {
+      this.props.navigation.navigate("Profile");
+    } else {
+      this.renderAlert("This barcode is not supported.", `${type} : ${data}`);
+    }
+  }
 
   renderAlert(title, message) {
     Alert.alert(
@@ -67,31 +87,33 @@ export default class ExpoScanner extends React.Component {
   render() {
     let { navigation } = this.props;
     const marginTop = Platform.OS == "android" ? StatusBar.currentHeight : 50;
-
-    return (
-      <View style={styles.container}>
-        <BarCodeScanner
-          // onBarCodeScanned={this.onBarCodeRead}
-          style={[StyleSheet.absoluteFill, styles.container]}
-        >
-          <View style={styles.layerTop}>{this.renderMessage()}</View>
-          <View style={styles.layerCenter}>
-            <View style={styles.layerLeft} />
-            <View style={styles.focused} />
-            <View style={styles.layerRight} />
-          </View>
-          <View style={styles.layerBottom}>
-            <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate("HDashboardNavigator")
-              }
-            >
-              <Text style={styles.cancelText}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </BarCodeScanner>
-      </View>
-    );
+    if (this.props.navigation.getParam("status")) {
+      return (
+        <View style={styles.container}>
+          <BarCodeScanner
+            onBarCodeScanned={this.onBarCodeRead}
+            style={[StyleSheet.absoluteFill, styles.container]}
+          >
+            <View style={styles.layerTop}>{this.renderMessage()}</View>
+            <View style={styles.layerCenter}>
+              <View style={styles.layerLeft} />
+              <View style={styles.focused} />
+              <View style={styles.layerRight} />
+            </View>
+            <View style={styles.layerBottom}>
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate("HDashboardNavigator")
+                }
+              >
+                <Text style={styles.cancelText}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </BarCodeScanner>
+        </View>
+      );
+    }
+    return null;
   }
 }
 

@@ -20,3 +20,6 @@ export const EmployeeApi = BaseUrl + "employee";
 
 //create employee api
 export const CreateEmployeeApi = BaseUrl + "create_employee";
+
+//img path
+export const ImgUploadApi = "http://128.199.79.79/zabuthirish/public/uploads/employee";

@@ -1,52 +1,25 @@
 import { createAppContainer } from "react-navigation";
-import { createMaterialTopTabNavigator } from "react-navigation-tabs";
+import { createStackNavigator } from "react-navigation-stack";
 //import Screens
 import DashboardDepartment from "@screens/dashboard/Department";
+import Profile from "@screens/account/Profile";
 //import React
 import React from "react";
 
 export default createAppContainer(
-  createMaterialTopTabNavigator(
+  createStackNavigator(
     {
       DashboardDepartment: {
         screen: DashboardDepartment,
         navigationOptions: () => ({
-          tabBarLabel: "Department",
+         headerShown:false
         }),
       },
     },
 
     {
       initialRouteName: "DashboardDepartment",
-      tabBarOptions: {
-        //   scrollEnabled:true,
-        upperCaseLabel: false,
-        activeTintColor: "#898989",
-        inactiveTintColor: "#898989",
-        showLabel: true,
-        tabStyle: {
-          paddingTop: 25,
-        },
-        style: {
-          backgroundColor: "#F2F2F2",
-          height: 50,
-        },
-        labelStyle: {
-          fontSize: 15,
-          fontWeight: "bold",
-          // marginTop: 30,
-          // lineHeight: 40,
-        },
-        indicatorStyle: {
-          backgroundColor: "#1179C2",
-          height: 2,
-        },
-        tabStyle: {
-          maxHeight: 50,
-          borderRightWidth: 1,
-          borderRightColor: "#E4E4E4",
-        },
-      },
+     
     }
   )
 );

@@ -6,11 +6,15 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from "react-native";
 
 //import components
 import Header from "@components/Header";
 import DropDown from "@components/DropDown";
+
+//import api
+import { ImgUploadApi } from "@api/Url";
 
 const DEPARTMENT = [
   { value: 1, label: "Department1" },
@@ -74,9 +78,16 @@ export default class ViewEmployee extends React.Component {
     });
   }
   render() {
-    // console.log("Employee",this.props.navigation.getParam("data"));
     let data = this.props.navigation.getParam("data");
-    let nrc=data.nrc_code_en + "/" + data.nrc_status_en + "/" + "(N)" +"/"+data.nrc_en_no;
+    console.log(data);
+    let nrc =
+      data.nrc_code_en +
+      "/" +
+      data.nrc_status_en +
+      "/" +
+      "(N)" +
+      "/" +
+      data.nrc_en_no;
     return (
       <View style={styles.container}>
         <Header
@@ -97,7 +108,7 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>Father Name   </Text>
+                <Text>Father Name </Text>
               </View>
               <View style={styles.textInput}>
                 <Text>{data.father_mm}</Text>
@@ -197,7 +208,7 @@ export default class ViewEmployee extends React.Component {
                 <Text>NRC</Text>
               </View>
               <View style={styles.textInput}>
-          <Text>{nrc}</Text>
+                <Text>{nrc}</Text>
               </View>
             </View>
 
@@ -206,9 +217,81 @@ export default class ViewEmployee extends React.Component {
                 <Text>Address</Text>
               </View>
               <View style={styles.textArea}>
-          <TextInput editable={false} >{data.address}</TextInput>
+                <TextInput editable={false}>{data.address}</TextInput>
               </View>
             </View>
+
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>Photo</Text>
+              </View>
+              {data.photo ? (
+                <View style={{ width: "60%" }}>
+                  <Image
+                    source={{
+                      uri: ImgUploadApi + "/" + data.name_en + "/" + data.photo,
+                    }}
+                    style={{ width: 200, height: 200 }}
+                  />
+                </View>
+              ) : (
+                <View style={{ width: "60%" }}>
+                  <Image
+                    source={{ uri: ImgUploadApi + "/" + data.photo }}
+                    style={{ width: 100, height: 100, backgroundColor: "red" }}
+                  />
+                </View>
+              )}
+            </View>
+
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>NRC Front</Text>
+              </View>
+              {data.photo ? (
+                <View style={{ width: "60%" }}>
+                  <Image
+                    source={{
+                      uri: ImgUploadApi + "/" + data.name_en + "/" + data.nrc_front,
+                    }}
+                    style={{ width: 200, height: 200 }}
+                  />
+                </View>
+              ) : (
+                <View style={{ width: "60%" }}>
+                  <Image
+                    source={{ uri: ImgUploadApi + "/" + data.nrc_front }}
+                    style={{ width: 100, height: 100, backgroundColor: "red" }}
+                  />
+                </View>
+              )}
+            </View>
+
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>NRC Back</Text>
+              </View>
+              {data.photo ? (
+                <View style={{ width: "60%" }}>
+                  <Image
+                    source={{
+                      uri: ImgUploadApi + "/" + data.name_en + "/" + data.nrc_back,
+                    }}
+                    style={{ width: 200, height: 200 }}
+                  />
+                </View>
+              ) : (
+                <View style={{ width: "60%" }}>
+                  <Image
+                    source={{ uri: ImgUploadApi + "/" + data.nrc_back }}
+                    style={{ width: 100, height: 100, backgroundColor: "red" }}
+                  />
+                </View>
+              )}
+            </View>
+
+
+         
             {/* 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>

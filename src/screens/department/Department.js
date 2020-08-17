@@ -25,8 +25,8 @@ export default class Department extends React.Component {
     this.state = {
       access_token: null,
       data: [],
-      arrIndex:null,
-      isOpenSuccessModel:false
+      arrIndex: null,
+      isOpenSuccessModel: false,
     };
   }
   async componentDidMount() {
@@ -58,33 +58,30 @@ export default class Department extends React.Component {
   _handleOnPress() {
     this.props.navigation.dispatch(DrawerActions.openDrawer());
   }
-  _handleOnPressEdit(arrIndex,data) {
-    if(arrIndex == 1)
-    {
-      this.props.navigation.navigate("EditDepartment",{data:data});
+  _handleOnPressEdit(arrIndex, data) {
+    if (arrIndex == 1) {
+      this.props.navigation.navigate("EditDepartment", { data: data });
     }
-    
   }
-  _handleOnPressDelete(data){
-    const self=this;
+  _handleOnPressDelete(data) {
+    const self = this;
     const url = DepartmentApi + "/" + data.id;
     axios
-    .delete(url,{
-      headers:{
-        Accept: "application/json",
-        Authorization: "Bearer " + self.state.access_token,
-      }
-    })
-    .then(function(response){
-      self.setState({isOpenSuccessModel:true})
-    })
-    .catch(function(err){
-      console.log(err);
-    })
+      .delete(url, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + self.state.access_token,
+        },
+      })
+      .then(function (response) {
+        self.setState({ isOpenSuccessModel: true });
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
-  _handleOnClose(){
-    this.setState({isOpenSuccessModel:false});
-    
+  _handleOnClose() {
+    this.setState({ isOpenSuccessModel: false });
   }
 
   render() {
@@ -99,15 +96,16 @@ export default class Department extends React.Component {
           <View style={styles.thirdContainer}>
             <Text>No</Text>
             <Text>Department Name</Text>
-            <Text>Action</Text>
+            {/* <Text>Action</Text> */}
           </View>
           {this.state.data.map((data, index) => {
+            var index=1;
             return (
               <View key={index}>
                 <DepartmentCard
                   No={index++}
                   name={data.department}
-                  onPressEdit={() => this._handleOnPressEdit(1,data)}
+                  onPressEdit={() => this._handleOnPressEdit(1, data)}
                   onPressDelete={() => this._handleOnPressDelete(data)}
                   onPressView={() => this.handleOnPressView()}
                 />
@@ -116,7 +114,7 @@ export default class Department extends React.Component {
           })}
         </View>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           activeOpacity={0.9}
           onPress={() => this.props.navigation.navigate("CreateDepartment")}
           style={styles.newBtn}
@@ -125,7 +123,7 @@ export default class Department extends React.Component {
             source={require("@images/addblue.png")}
             style={styles.btnImg}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <SuccessModal
           isOpen={this.state.isOpenSuccessModel}

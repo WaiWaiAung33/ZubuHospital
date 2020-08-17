@@ -25,13 +25,15 @@ export default class DepartmentCard extends React.Component {
           <Text>Action</Text>
         </View> */}
         <View style={[styles.secondContainer, { marginTop: 15 }]}>
-      <Text style={[styles.text, { fontWeight: "bold" }]}>{this.props.No}</Text>
-      <Text style={styles.text}>{this.props.name}</Text>
-          <Actionpopupmenu
+          <Text style={[styles.text, { fontWeight: "bold" }]}>
+            {this.props.No}
+          </Text>
+          <Text style={styles.text}>{this.props.name}</Text>
+          {/* <Actionpopupmenu
             arrIndex={this.props.arrIndex}
             options={ACTION_POPUP_DATA}
             onSelect={this._handleOnSelectActionPopup.bind(this)}
-          />
+          /> */}
         </View>
         {/* <View style={[styles.secondContainer, { marginTop: 15 }]}>
           <Text style={[styles.text, { fontWeight: "bold" }]}>2</Text>
@@ -64,8 +66,8 @@ const styles = StyleSheet.create({
     // flex:1,
     flexDirection: "row",
     justifyContent: "space-between",
-    borderBottomWidth:1,
-    paddingBottom:10,
+    borderBottomWidth: 1,
+    paddingBottom: 10,
   },
   dateText: {
     fontWeight: "bold",

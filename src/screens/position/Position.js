@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   AsyncStorage,
+  ScrollView
 } from "react-native";
 
 import { DrawerActions } from "react-navigation-drawer";
@@ -104,11 +105,13 @@ export default class Position extends React.Component {
           <View style={styles.thirdContainer}>
             <Text>No</Text>
             <Text>Position Name</Text>
-            <Text>Action</Text>
+            {/* <Text>Action</Text> */}
           </View>
+          <ScrollView>
           {this.state.data.map((data, index) => {
+            var index=1;
             return (
-              <View>
+              <View key={index}>
                 <PositionCard
                   No={index++}
                   name={data.designation}
@@ -119,8 +122,9 @@ export default class Position extends React.Component {
               </View>
             );
           })}
+          </ScrollView>
         </View>
-
+{/* 
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={() => this.props.navigation.navigate("CreatePosition")}
@@ -130,7 +134,7 @@ export default class Position extends React.Component {
             source={require("@images/addblue.png")}
             style={styles.btnImg}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <SuccessModal
           isOpen={this.state.isOpenSuccessModel}
           text="Designation delete Successfully"
