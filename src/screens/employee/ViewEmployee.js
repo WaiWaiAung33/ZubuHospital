@@ -131,7 +131,7 @@ export default class ViewEmployee extends React.Component {
           <View style={{ marginTop: 10 }}>
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>Name</Text>
+                <Text>အမည်</Text>
               </View>
               <View style={styles.textInput}>
                 <Text>{data.name_mm}</Text>
@@ -140,7 +140,7 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>Father Name </Text>
+                <Text>အဖအမည်</Text>
               </View>
               <View style={styles.textInput}>
                 <Text>{data.father_mm}</Text>
@@ -149,7 +149,7 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>DOB </Text>
+                <Text>မွေးသက္ကရာဇ် </Text>
               </View>
               <View style={styles.textInput}>
                 <Text>{data.birth}</Text>
@@ -158,7 +158,7 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>Mail </Text>
+                <Text>အီးမေးလ် </Text>
               </View>
               <View style={styles.textInput}>
                 <Text>{data.email}</Text>
@@ -167,7 +167,7 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>Position</Text>
+                <Text>ရာထူး</Text>
               </View>
               <View style={styles.textInput}>
                 <Text>{data.designation.designation}</Text>
@@ -176,7 +176,7 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>Department</Text>
+                <Text>ဌာန</Text>
               </View>
               <View style={styles.textInput}>
                 <Text>{data.department.department}</Text>
@@ -185,7 +185,7 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>Education</Text>
+                <Text>ပညာအရည်အချင်း</Text>
               </View>
               <View style={styles.textInput}>
                 <Text>{data.education}</Text>
@@ -194,7 +194,7 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>Phone No</Text>
+                <Text>ဖုန်းနံပတ်</Text>
               </View>
               <View style={styles.textInput}>
                 <Text>{data.ph_no}</Text>
@@ -237,7 +237,7 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>NRC</Text>
+                <Text>မှတ်ပုံတင်နံပတ်</Text>
               </View>
               <View style={styles.textInput}>
                 <Text>{nrc}</Text>
@@ -246,7 +246,7 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>Address</Text>
+                <Text>နေရပ်လိပ်စာ</Text>
               </View>
               <View style={styles.textArea}>
                 <TextInput editable={false}>{data.address}</TextInput>
@@ -255,7 +255,7 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>Photo</Text>
+                <Text>ဓာတ်ပုံ</Text>
               </View>
               {data.photo ? (
                 <View style={{ width: "60%" }}>
@@ -269,19 +269,12 @@ export default class ViewEmployee extends React.Component {
                     />
                   </TouchableOpacity>
                 </View>
-              ) : (
-                <View style={{ width: "60%" }}>
-                  <Image
-                    source={{ uri: ImgUploadApi + "/" + data.photo }}
-                    style={{ width: 100, height: 100, backgroundColor: "red" }}
-                  />
-                </View>
-              )}
+              ) : null}
             </View>
-
+                
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>NRC Front</Text>
+                <Text>မှတ်ပုံတင်အရှေ့</Text>
               </View>
               {data.photo ? (
                 <View style={{ width: "60%" }}>
@@ -299,19 +292,12 @@ export default class ViewEmployee extends React.Component {
                     />
                   </TouchableOpacity>
                 </View>
-              ) : (
-                <View style={{ width: "60%" }}>
-                  <Image
-                    source={{ uri: ImgUploadApi + "/" + data.nrc_front }}
-                    style={{ width: 100, height: 100, backgroundColor: "red" }}
-                  />
-                </View>
-              )}
+              ) :null}
             </View>
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
-                <Text>NRC Back</Text>
+                <Text>မှတ်ပုံတင်အနောက်</Text>
               </View>
               {data.photo ? (
                 <View style={{ width: "60%" }}>
@@ -329,14 +315,7 @@ export default class ViewEmployee extends React.Component {
                     />
                   </TouchableOpacity>
                 </View>
-              ) : (
-                <View style={{ width: "60%" }}>
-                  <Image
-                    source={{ uri: ImgUploadApi + "/" + data.nrc_back }}
-                    style={{ width: 100, height: 100, backgroundColor: "red" }}
-                  />
-                </View>
-              )}
+              ) : null}
             </View>
 
             {/* 

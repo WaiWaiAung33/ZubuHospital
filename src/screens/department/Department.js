@@ -115,11 +115,11 @@ export default class Department extends React.Component {
             {/* <Text>Action</Text> */}
           </View>
           {this.state.data.map((data, index) => {
-            var index=1;
+            // var index=1;
             return (
               <View key={index}>
                 <DepartmentCard
-                  No={index++}
+                  No={index}
                   name={data.department}
                   onPressEdit={() => this._handleOnPressEdit(1, data)}
                   onPressDelete={() => this._handleOnPressDelete(data)}

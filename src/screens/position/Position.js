@@ -125,11 +125,11 @@ export default class Position extends React.Component {
           </View>
           <ScrollView>
           {this.state.data.map((data, index) => {
-            var index=1;
+            // var index=1;
             return (
               <View key={index}>
                 <PositionCard
-                  No={index++}
+                  No={index}
                   name={data.designation}
                   onPressEdit={() => this._handleOnPressEdit(1, data)}
                   onPressDelete={() => this._handleOnPressDelete(data)}

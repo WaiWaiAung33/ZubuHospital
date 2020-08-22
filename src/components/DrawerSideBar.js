@@ -20,6 +20,11 @@ import { ImgUploadApi } from "@api/Url";
 
 const DRAWER_ITEMS = [
   {
+    routeName:"HDashboardNavigator",
+    label:"Dashboard",
+    image:require("@images/dashboard.png"),
+  },
+  {
     routeName: "Position",
     label: "Designation",
     image: require("@images/change.png"),

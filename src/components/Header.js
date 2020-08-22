@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "#FE7F0A",
     alignItems: "center",
     flexDirection: "row",
-    height: 50,
+    height: 70,
     // flex:1
   },
   text: {

@@ -33,16 +33,16 @@ export default class EmployeeCard extends React.Component {
             <Text style={styles.dateText}>{this.props.date}</Text>
             <View style={styles.secondContainer}>
               <View style={{ width: "40%" }}>
-                <Text style={[styles.text, { fontWeight: "bold" }]}>Name</Text>
+                <Text style={[styles.text, { fontWeight: "bold" }]}>အမည်</Text>
                 <Text style={[styles.text, { fontWeight: "bold" }]}>
-                  Position
+                  ရာထူး
                 </Text>
                 <Text style={[styles.text, { fontWeight: "bold" }]}>
-                  Department
+                  ဌာန
                 </Text>
                 {/* <Text style={[styles.text, { fontWeight: "bold" }]}>Serial No</Text> */}
                 <Text style={[styles.text, { fontWeight: "bold" }]}>
-                  Phone No:
+                  ဖုန်းနံပတ်
                 </Text>
                 {/* <Text style={[styles.text, { fontWeight: "bold" }]}>Model</Text> */}
               </View>
