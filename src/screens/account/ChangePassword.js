@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  BackHandler
 } from "react-native";
 
 import { DrawerActions } from "react-navigation-drawer";
@@ -16,6 +17,23 @@ import Header from "@components/Header";
 export default class Chage extends React.Component {
   constructor(props) {
     super(props);
+    this.BackHandler=null;
+  }
+  async componentDidMount(){
+    this.setBackHandler();
+  }
+  setBackHandler() {
+    BackHandler.addEventListener(
+      "hardwareBackPress",
+      this._handleBackButton.bind(this)
+    );
+  }
+  _handleBackButton = () => {
+    this.props.navigation.navigate("DashboardDepartment");
+    return true;
+  };
+  UNSAFE_componentWillUnmount() {
+    this.focusListener.remove();
   }
   _handleOnPress() {
     this.props.navigation.dispatch(DrawerActions.openDrawer());

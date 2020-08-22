@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   AsyncStorage,
+  BackHandler
 } from "react-native";
 
 import { DrawerActions } from "react-navigation-drawer";
@@ -40,10 +41,12 @@ export default class Position extends React.Component {
       department: { value: null, label: null },
       access_token: null,
       data: [],
-      arrIndex:null
+      arrIndex:null,
     };
+    this.BackHandler=null;
   }
   async componentDidMount() {
+    this.setBackHandler();
     const access_token = await AsyncStorage.getItem("access_token");
     this.setState({ access_token: access_token });
     const { navigation } = this.props;
@@ -51,6 +54,19 @@ export default class Position extends React.Component {
       await this._getAllEmployee();
     });
     await this._getAllEmployee();
+  }
+  setBackHandler() {
+    BackHandler.addEventListener(
+      "hardwareBackPress",
+      this._handleBackButton.bind(this)
+    );
+  }
+  _handleBackButton = () => {
+    this.props.navigation.navigate("DashboardDepartment");
+    return true;
+  };
+  UNSAFE_componentWillUnmount() {
+    this.focusListener.remove();
   }
   _getAllEmployee() {
     const self = this;

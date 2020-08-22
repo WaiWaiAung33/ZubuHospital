@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Image,
   AsyncStorage,
-  ScrollView
+  ScrollView,
+  BackHandler
 } from "react-native";
 
 import { DrawerActions } from "react-navigation-drawer";
@@ -30,8 +31,10 @@ export default class Position extends React.Component {
       arrIndex: null,
       isOpenSuccessModel: false,
     };
+    this.BackHandler=null;
   }
   async componentDidMount() {
+    this.setBackHandler();
     const access_token = await AsyncStorage.getItem("access_token");
     this.setState({ access_token: access_token });
     const { navigation } = this.props;
@@ -39,6 +42,19 @@ export default class Position extends React.Component {
       await this._getAllPosition();
     });
     await this._getAllPosition();
+  }
+  setBackHandler() {
+    BackHandler.addEventListener(
+      "hardwareBackPress",
+      this._handleBackButton.bind(this)
+    );
+  }
+  _handleBackButton = () => {
+    this.props.navigation.navigate("DashboardDepartment");
+    return true;
+  };
+  UNSAFE_componentWillUnmount() {
+    this.focusListener.remove();
   }
   _getAllPosition() {
     const self = this;

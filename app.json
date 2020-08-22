@@ -1,14 +1,22 @@
 {
   "expo": {
-    "name": "ZubuHospital",
-    "slug": "ZubuHospital",
-    "version": "1.0.0",
+    "name": "zubuthirish",
+    "slug": "zubuthirish",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/hospitals.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/hospitals.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "bundleIdentifier": "com.zubuthirish.zubuthirish",
+      "buildNumber": "1.0.1"
+    },
+    "android": {
+      "package": "com.zubuthirish.zubuthirish",
+      "versionCode": 1
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -16,9 +24,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "web": {
       "favicon": "./assets/favicon.png"
     }

@@ -57,6 +57,7 @@ export default class ExpoScanner extends React.Component {
 
     if (data) {
       this.props.navigation.navigate("Profile");
+      console.log("Scan QR Data",data);
     } else {
       this.renderAlert("This barcode is not supported.", `${type} : ${data}`);
     }

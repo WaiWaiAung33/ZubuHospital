@@ -85,6 +85,7 @@ export default class DrawerSideBar extends React.Component {
       phone: "",
       photo: "",
       name_en: "",
+      isOpenDeleteConfirmModal: false,
     };
   }
   async componentDidMount() {

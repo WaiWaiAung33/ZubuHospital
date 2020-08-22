@@ -6,6 +6,7 @@ import {
   AsyncStorage,
   ScrollView,
   Image,
+  BackHandler,
 } from "react-native";
 
 //import api
@@ -28,8 +29,10 @@ export default class DashboardDepartment extends React.Component {
       department: "",
       designation: "",
     };
+    this.BackHandler = null;
   }
   async componentDidMount() {
+    this.setBackHandler();
     const roleid = await AsyncStorage.getItem("role_id");
     const nrccode = await AsyncStorage.getItem("nrccode");
     const nrc_state = await AsyncStorage.getItem("nrc_state");
@@ -57,6 +60,16 @@ export default class DashboardDepartment extends React.Component {
       designation,
     });
   }
+  setBackHandler() {
+    BackHandler.addEventListener(
+      "hardwareBackPress",
+      this._handleBackButton.bind(this)
+    );
+  }
+  _handleBackButton = () => {
+    BackHandler.exitApp();
+    return true;
+  };
   render() {
     // console.log(AsyncStorage.getItem("role_id"));
     return (

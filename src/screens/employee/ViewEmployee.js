@@ -12,6 +12,10 @@ import {
 //import components
 import Header from "@components/Header";
 import DropDown from "@components/DropDown";
+//import components
+import PhotoModal from "@components/PhotoModal";
+import PhotoModalNRCFront from "@components/PhotoModal";
+import PhotoModalNRCBack from "@components/PhotoModal";
 
 //import api
 import { ImgUploadApi } from "@api/Url";
@@ -47,6 +51,9 @@ export default class ViewEmployee extends React.Component {
       nrccode: { value: null, label: null },
       nrcstate: { value: null, label: null },
       nrcstatus: { value: null, label: null },
+      isOpenPhotoModal: false,
+      isOpenPhotoModalBack:false,
+      isOpenPhotoModalFront:false
     };
   }
   _handleOnPress() {
@@ -77,9 +84,19 @@ export default class ViewEmployee extends React.Component {
       nrcstatus: { value: value, label: label },
     });
   }
+  _onPress() {
+    this.setState({ isOpenPhotoModal: true });
+  }
+  _onPressFront() {
+    this.setState({ isOpenPhotoModalFront: true });
+  }
+  _onPressBack() {
+    this.setState({ isOpenPhotoModalBack: true });
+  }
+
   render() {
     let data = this.props.navigation.getParam("data");
-    console.log(data);
+    // console.log(data);
     let nrc =
       data.nrc_code_en +
       "/" +
@@ -91,9 +108,24 @@ export default class ViewEmployee extends React.Component {
     return (
       <View style={styles.container}>
         <Header
-          name="View Employee"
+          name="Employee Detail"
           //   img={require("@images/threeline.png")}
           Onpress={() => this._handleOnPress()}
+        />
+        <PhotoModal
+          isOpen={this.state.isOpenPhotoModal}
+          photo={{ uri: ImgUploadApi + "/" + data.name_en + "/" + data.photo }}
+          onClose={() => this.setState({ isOpenPhotoModal: false })}
+        />
+         <PhotoModalNRCFront
+          isOpen={this.state.isOpenPhotoModalFront}
+          photo={{ uri: ImgUploadApi + "/" + data.name_en + "/" + data.nrc_front }}
+          onClose={() => this.setState({ isOpenPhotoModalFront: false })}
+        />
+         <PhotoModalNRCBack
+          isOpen={this.state.isOpenPhotoModalBack}
+          photo={{ uri: ImgUploadApi + "/" + data.name_en + "/" + data.nrc_back }}
+          onClose={() => this.setState({ isOpenPhotoModalBack: false })}
         />
         <ScrollView>
           <View style={{ marginTop: 10 }}>
@@ -227,12 +259,15 @@ export default class ViewEmployee extends React.Component {
               </View>
               {data.photo ? (
                 <View style={{ width: "60%" }}>
-                  <Image
-                    source={{
-                      uri: ImgUploadApi + "/" + data.name_en + "/" + data.photo,
-                    }}
-                    style={{ width: 200, height: 200 }}
-                  />
+                  <TouchableOpacity onPress={() => this._onPress()}>
+                    <Image
+                      source={{
+                        uri:
+                          ImgUploadApi + "/" + data.name_en + "/" + data.photo,
+                      }}
+                      style={{ width: 200, height: 200 }}
+                    />
+                  </TouchableOpacity>
                 </View>
               ) : (
                 <View style={{ width: "60%" }}>
@@ -250,12 +285,19 @@ export default class ViewEmployee extends React.Component {
               </View>
               {data.photo ? (
                 <View style={{ width: "60%" }}>
-                  <Image
-                    source={{
-                      uri: ImgUploadApi + "/" + data.name_en + "/" + data.nrc_front,
-                    }}
-                    style={{ width: 200, height: 200 }}
-                  />
+                  <TouchableOpacity onPress={() => this._onPressFront()}>
+                    <Image
+                      source={{
+                        uri:
+                          ImgUploadApi +
+                          "/" +
+                          data.name_en +
+                          "/" +
+                          data.nrc_front,
+                      }}
+                      style={{ width: 200, height: 200, flex: 1 }}
+                    />
+                  </TouchableOpacity>
                 </View>
               ) : (
                 <View style={{ width: "60%" }}>
@@ -273,12 +315,19 @@ export default class ViewEmployee extends React.Component {
               </View>
               {data.photo ? (
                 <View style={{ width: "60%" }}>
-                  <Image
-                    source={{
-                      uri: ImgUploadApi + "/" + data.name_en + "/" + data.nrc_back,
-                    }}
-                    style={{ width: 200, height: 200 }}
-                  />
+                  <TouchableOpacity onPress={() => this._onPressBack()}>
+                    <Image
+                      source={{
+                        uri:
+                          ImgUploadApi +
+                          "/" +
+                          data.name_en +
+                          "/" +
+                          data.nrc_back,
+                      }}
+                      style={{ width: 200, height: 200 }}
+                    />
+                  </TouchableOpacity>
                 </View>
               ) : (
                 <View style={{ width: "60%" }}>
@@ -290,8 +339,6 @@ export default class ViewEmployee extends React.Component {
               )}
             </View>
 
-
-         
             {/* 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
