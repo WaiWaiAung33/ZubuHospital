@@ -14,6 +14,7 @@ import EditEmployee from "@screens/employee/EditEmployee";
 import ViewEmployee from "@screens/employee/ViewEmployee";
 
 import Profile from "@screens/account/Profile";
+import QrProfile from "@screens/account/QrProfile";
 
 //import Navigators
 import DrawerNavigator from "./DrawerNavigator";
@@ -71,6 +72,12 @@ export default createAppContainer(
       },
       Profile: {
         screen: Profile,
+        navigationOptions: ({ navigation }) => ({
+          headerShown: false,
+        }),
+      },
+      QrProfile: {
+        screen: QrProfile,
         navigationOptions: ({ navigation }) => ({
           headerShown: false,
         }),

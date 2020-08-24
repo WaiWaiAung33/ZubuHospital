@@ -7,6 +7,7 @@ import Position from "@screens/position/Position";
 import Employee from "@screens/employee/Employee";
 import ChangePassword from "@screens/account/ChangePassword";
 import QrScan from "@screens/qrcode/QrScan";
+import Profile from "@screens/account/Profile";
 
 //import Navigator
 import HDashboardNavigator from "./HDashboardNavigator";
@@ -35,6 +36,9 @@ export default createAppContainer(
       },
       QrScan:{
         screen: QrScan
+    },
+    Profile:{
+      screen:Profile
     }
     },
     {

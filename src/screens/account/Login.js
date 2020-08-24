@@ -70,7 +70,7 @@ export default class Login extends React.Component {
               if(role_id== "1"){
                 employee_Id = response.data.data.loginId.toString();
               }else{
-                employee_Id = response.data.data.employee[0].userId.toString();
+                employee_Id = response.data.data.employee[0].id.toString();
                 nrccode =  response.data.data.employee[0].nrc_code_en;
                 nrc_state=response.data.data.employee[0].nrc_en;
                 nrc_status=response.data.data.employee[0].nrc_status_en;
@@ -93,6 +93,7 @@ export default class Login extends React.Component {
               // console.log(employee.address);
               AsyncStorage.multiSet(
                 [
+                 
                   ["role_id", role_id],
                   ["access_token", response.data.access_token],
                   ["email", response.data.data.loginId],

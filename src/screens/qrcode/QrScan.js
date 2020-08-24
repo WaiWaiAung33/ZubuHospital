@@ -9,10 +9,14 @@ import {
   Platform,
   StatusBar,
   BackHandler,
+  AsyncStorage
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
+
+const axios = require("axios");
+import {QrCodeApi} from "@api/Url";
 
 export default class ExpoScanner extends React.Component {
   constructor(props) {
@@ -26,14 +30,18 @@ export default class ExpoScanner extends React.Component {
       type: Camera.Constants.Type.back,
       scannedItem: {},
       isLoding: false,
+      access_token:null
     };
   }
 
-  componentDidMount() {
+ async componentDidMount() {
+    const access_token=await AsyncStorage.getItem("access_token");
+    this.setState({access_token:access_token});
     this.BackHandler = BackHandler.addEventListener(
       "hardwareBackPress",
       this.handleBackPress
     );
+   
   }
   componentWillUnmount() {
     this.BackHandler.remove();
@@ -56,11 +64,36 @@ export default class ExpoScanner extends React.Component {
     this.setState({ scannedItem: { data, type } });
 
     if (data) {
-      this.props.navigation.navigate("Profile");
-      console.log("Scan QR Data",data);
+      user_id = data;
+      this._fetchMemberData(user_id);
     } else {
       this.renderAlert("This barcode is not supported.", `${type} : ${data}`);
     }
+  }
+
+  _fetchMemberData(user_id) {
+    // console.log("User_id",user_id);
+    const self = this;
+    const url=QrCodeApi+"/"+user_id;
+    // console.log("Employee Api",url);
+    axios
+    .get(url,{
+      headers:{
+        Accept: "application/json",
+        Authorization: "Bearer " + self.state.access_token,
+      }
+    })
+   .then(function(response){
+     const data=response.data.data;
+     self.props.navigation.navigate("QrProfile",{
+       data:data[0],
+       backRoute:"Profile"
+     })
+    //  console.log("Employee Qr",response.data);
+   })
+   .catch(function(err){
+     console.log(err);
+   })
   }
 
   renderAlert(title, message) {
@@ -86,6 +119,7 @@ export default class ExpoScanner extends React.Component {
   }
 
   render() {
+    // console.log(this.state.access_token);
     let { navigation } = this.props;
     const marginTop = Platform.OS == "android" ? StatusBar.currentHeight : 50;
     if (this.props.navigation.getParam("status")) {

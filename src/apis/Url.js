@@ -23,3 +23,6 @@ export const CreateEmployeeApi = BaseUrl + "create_employee";
 
 //img path
 export const ImgUploadApi = "http://128.199.79.79/zabuthirish/public/uploads/employee";
+
+//import qrCode
+export const QrCodeApi = "http://128.199.79.79/zabuthirish/public/api/employee/qrdata";

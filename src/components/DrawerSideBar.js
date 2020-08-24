@@ -39,11 +39,16 @@ const DRAWER_ITEMS = [
     label: "Employee",
     image: require("@images/doctor.png"),
   },
-  {
-    routeName: "ChangePassword",
-    label: "Change Password",
-    image: require("@images/password.png"),
-  },
+  // {
+  //   routeName: "ChangePassword",
+  //   label: "Change Password",
+  //   image: require("@images/password.png"),
+  // },
+  // {
+  //   routeName:"Profile",
+  //   label:"Profile",
+  //   image: require("@images/profile.png")
+  // },
   {
     routeName: "QrScan",
     label: "Qr Scan",
@@ -56,13 +61,19 @@ const DRAWER_ITEMS = [
     customWidth: 30,
     customHeight: 30,
   },
+ 
 ];
 
 const EMPLOYEE_DRAWER_ITEMS = [
+  // {
+  //   routeName: "ChangePassword",
+  //   label: "Change Password",
+  //   image: require("@images/password.png"),
+  // },
   {
-    routeName: "ChangePassword",
-    label: "Change Password",
-    image: require("@images/password.png"),
+    routeName:"Profile",
+    label:"Profile",
+    image: require("@images/profile.png")
   },
   {
     routeName: "QrScan",
@@ -156,7 +167,7 @@ export default class DrawerSideBar extends React.Component {
   }
 
   render() {
-    console.log(this.state.name);
+    // console.log("Employee ID",this.state.user_id);
     // alert(this.state.role_id);
     return (
       <View style={styles.container}>

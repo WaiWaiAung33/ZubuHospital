@@ -6,7 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  BackHandler
+  BackHandler,
+  AsyncStorage
 } from "react-native";
 
 import { DrawerActions } from "react-navigation-drawer";
@@ -17,9 +18,16 @@ import Header from "@components/Header";
 export default class Chage extends React.Component {
   constructor(props) {
     super(props);
+    this.state={
+      password:""
+    }
     this.BackHandler=null;
   }
   async componentDidMount(){
+    const pass = await AsyncStorage.getItem("password");
+    this.setState({
+      password:pass
+    })
     this.setBackHandler();
   }
   setBackHandler() {
@@ -40,6 +48,7 @@ export default class Chage extends React.Component {
   }
 
   render() {
+    console.log(this.state.password);
     return (
       <View style={styles.container}>
         <Header
