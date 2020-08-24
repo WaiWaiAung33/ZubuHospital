@@ -96,7 +96,7 @@ export default class ViewEmployee extends React.Component {
 
   render() {
     let data = this.props.navigation.getParam("data");
-    // console.log(data);
+    // console.log("Employee Detail",data);
     let nrc =
       data.nrc_code_en +
       "/" +
@@ -158,10 +158,47 @@ export default class ViewEmployee extends React.Component {
 
             <View style={styles.secondConatiner}>
               <View style={styles.text}>
+                <Text>လူမျိုး </Text>
+              </View>
+              <View style={styles.textInput}>
+                <Text>{data.native}</Text>
+              </View>
+            </View>
+
+            
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>ကိုးကွယ်သည့်ဘာသာ </Text>
+              </View>
+              <View style={styles.textInput}>
+                <Text>{data.religion}</Text>
+              </View>
+            </View>
+
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
                 <Text>အီးမေးလ် </Text>
               </View>
               <View style={styles.textInput}>
                 <Text>{data.email}</Text>
+              </View>
+            </View>
+
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>အလုပ်စဝင်သည့်နေ့ </Text>
+              </View>
+              <View style={styles.textInput}>
+                <Text>{data.start_date}</Text>
+              </View>
+            </View>
+
+            <View style={styles.secondConatiner}>
+              <View style={styles.text}>
+                <Text>ဝန်ထမ်းနံပတ်</Text>
+              </View>
+              <View style={styles.textInput}>
+                <Text>{data.job_id}</Text>
               </View>
             </View>
 
@@ -188,7 +225,7 @@ export default class ViewEmployee extends React.Component {
                 <Text>ပညာအရည်အချင်း</Text>
               </View>
               <View style={styles.textInput}>
-                <Text>{data.education}</Text>
+                <Text>{data.education ? data.education : null}</Text>
               </View>
             </View>
 
