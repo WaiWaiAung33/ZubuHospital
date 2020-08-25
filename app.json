@@ -10,10 +10,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "ios": {
-      "bundleIdentifier": "com.zubuthirish.zubuthirish",
-      "buildNumber": "1.0.1"
-    },
     "android": {
       "package": "com.zubuthirish.zubuthirish",
       "versionCode": 1

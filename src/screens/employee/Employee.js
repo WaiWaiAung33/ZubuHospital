@@ -50,10 +50,10 @@ export default class Position extends React.Component {
     const access_token = await AsyncStorage.getItem("access_token");
     this.setState({ access_token: access_token });
     const { navigation } = this.props;
+     this._getAllEmployee();
     this.focusListener = navigation.addListener("didFocus", async () => {
       await this._getAllEmployee();
     });
-    await this._getAllEmployee();
   }
   setBackHandler() {
     BackHandler.addEventListener(
@@ -68,23 +68,45 @@ export default class Position extends React.Component {
   UNSAFE_componentWillUnmount() {
     this.focusListener.remove();
   }
-  _getAllEmployee() {
+  _getAllEmployee(){
     const self = this;
+    let bodyParam = {
+
+    };
     axios
-      .get(EmployeeApi, {
-        headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + self.state.access_token,
-        },
-      })
-      .then(function (response) {
-        self.setState({ data: response.data.employee });
-        // console.log(response.data.employee);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
+    .post(EmployeeApi,bodyParam,{
+      headers:{
+        Accept:"application/json",
+        Authorization:"Bearer " + self.state.access_token,
+      }
+    })
+    .then(function(response){
+      self.setState({ data: response.data.employee });
+      // console.log(response.data);
+    })
+    .catch(function(err){
+      console.log("Employee Error",err);
+    })
   }
+//  async _getAllEmployee() {
+//     const self = this;
+//     const headers =  {
+//       Accept:"application/json",
+//       Authorization:"Bearer " + self.state.access_token,
+//     }
+//     console.log(headers);
+//     axios
+//     .post("http://128.199.79.79/zabuthirish/public/api/employee",{
+//       headers,
+//     })
+//     .then(function (response) {
+//         self.setState({ data: response.data.employee });
+//         console.log(response.data.employee);
+//       })
+//       .catch(function (err) {
+//         console.log(err);
+//       });
+//   }
   _handleOnPress() {
     this.props.navigation.dispatch(DrawerActions.openDrawer());
   }
@@ -105,6 +127,7 @@ export default class Position extends React.Component {
   }
 
   render() {
+    // console.log("Employee",this.state.access_token);
     return (
       <View style={styles.container}>
         <Header

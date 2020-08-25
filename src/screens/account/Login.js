@@ -51,7 +51,7 @@ export default class Login extends React.Component {
             },
           })
           .then(function (response) {
-            // console.log("Role",response.data);
+            console.log("Role",response.data);
             if (response.data.status == 1) {
              
               var role_id = response.data.data.role_id.toString();

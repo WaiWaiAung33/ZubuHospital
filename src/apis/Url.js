@@ -16,7 +16,7 @@ export const DepartmentApi = BaseUrl + "department";
 export const CreateDepartmentApi = BaseUrl + "create_department";
 
 //get employee api
-export const EmployeeApi = BaseUrl + "employee";
+export const EmployeeApi = "http://128.199.79.79/zabuthirish/public/api/employee";
 
 //create employee api
 export const CreateEmployeeApi = BaseUrl + "create_employee";
@@ -25,4 +25,7 @@ export const CreateEmployeeApi = BaseUrl + "create_employee";
 export const ImgUploadApi = "http://128.199.79.79/zabuthirish/public/uploads/employee";
 
 //import qrCode
-export const QrCodeApi = "http://128.199.79.79/zabuthirish/public/api/employee/qrdata";
+export const QrCodeApi = BaseUrl + "employee/qrdata";
+
+//import dashboard
+export const DashboardApi = BaseUrl + "dashboard";

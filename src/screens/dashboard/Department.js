@@ -7,10 +7,12 @@ import {
   ScrollView,
   Image,
   BackHandler,
+  Dimensions
 } from "react-native";
-
+const { width } = Dimensions.get("window");
 //import api
-import { ImgUploadApi } from "@api/Url";
+import { ImgUploadApi, DashboardApi } from "@api/Url";
+const axios = require("axios");
 
 export default class DashboardDepartment extends React.Component {
   constructor(props) {
@@ -28,11 +30,14 @@ export default class DashboardDepartment extends React.Component {
       name_en: "",
       department: "",
       designation: "",
+      access_token: null,
+      data: [],
     };
     this.BackHandler = null;
   }
   async componentDidMount() {
     this.setBackHandler();
+    const access_token = await AsyncStorage.getItem("access_token");
     const roleid = await AsyncStorage.getItem("role_id");
     const nrccode = await AsyncStorage.getItem("nrccode");
     const nrc_state = await AsyncStorage.getItem("nrc_state");
@@ -58,7 +63,28 @@ export default class DashboardDepartment extends React.Component {
       name_en,
       department,
       designation,
+      access_token,
     });
+    await this.getDashboard();
+  }
+  async getDashboard() {
+    const self = this;
+    axios
+      .get(DashboardApi, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + self.state.access_token,
+        },
+      })
+      .then(function (response) {
+        // console.log("Dashboard",response.data.department);
+        self.setState({
+          data: response.data.department,
+        });
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
   setBackHandler() {
     BackHandler.addEventListener(
@@ -76,40 +102,35 @@ export default class DashboardDepartment extends React.Component {
       <View>
         {this.state.roleid == "1" ? (
           <View style={styles.container}>
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
-              <Text>Department 1</Text>
-              <View
-                style={{
-                  width: 150,
-                  height: 100,
-                  backgroundColor: "#039BE7",
-                  marginTop: 10,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: 10,
-                }}
-              >
-                <Text style={styles.textdep}>Employee</Text>
-                <Text style={styles.textdep}>20</Text>
-              </View>
+            <View style={styles.btnContainer}>
+              {this.state.data.map((data, index) => {
+               
+                return (
+                  <View key={index}>
+                    <Text style={{textAlign:"center"}}>{data.department}</Text>
+                    <View
+                      style={{
+                        // width: 150,
+                        // height: 100,
+                        backgroundColor: "#039BE7",
+                        marginTop: 10,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: 10,
+                        width: width / 2 - 50,
+                        height: width / 2 - 50,
+                        margin: 5,
+
+                      }}
+                    >
+                      <Text style={styles.textdep}>Employee</Text>
+                      <Text style={styles.textdep}>{data.employee.length}</Text>
+                    </View>
+                  </View>
+                );
+              })}
             </View>
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
-              <Text>Department 1</Text>
-              <View
-                style={{
-                  width: 150,
-                  height: 100,
-                  backgroundColor: "#039BE7",
-                  marginTop: 10,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: 10,
-                }}
-              >
-                <Text style={styles.textdep}>Employee</Text>
-                <Text style={styles.textdep}>20</Text>
-              </View>
-            </View>
+            
           </View>
         ) : (
           <View style={{ alignItems: "center" }}>
@@ -188,6 +209,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     margin: 10,
+  },
+   btnContainer: {
+    paddingBottom: 20,
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    marginTop: 10
   },
   secondContainer: {
     // marginLeft: 10,
