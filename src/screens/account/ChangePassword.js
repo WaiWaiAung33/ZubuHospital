@@ -11,6 +11,11 @@ import {
 } from "react-native";
 
 import { DrawerActions } from "react-navigation-drawer";
+import * as Crypto from "expo-crypto";
+
+//import api
+const axios = require("axios");
+import {ChangePasswordApi} from "@api/Url";
 
 //import components
 import Header from "@components/Header";
@@ -19,14 +24,23 @@ export default class Chage extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      password:""
+      password:"",
+      user_id:"",
+      oldpassword:"",
+      newpassword:"",
+      confirmpassword:"",
+      access_token:null
     }
     this.BackHandler=null;
   }
   async componentDidMount(){
     const pass = await AsyncStorage.getItem("password");
+    const user_id = await AsyncStorage.getItem("user_id");
+    const access_token = await AsyncStorage.getItem("access_token");
     this.setState({
-      password:pass
+      password:pass,
+      user_id:user_id,
+      access_token:access_token
     })
     this.setBackHandler();
   }
@@ -46,6 +60,45 @@ export default class Chage extends React.Component {
   _handleOnPress() {
     this.props.navigation.dispatch(DrawerActions.openDrawer());
   }
+_handleChangePassword= async () =>{
+    var self=this;
+    const newPasswordSHA1 = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA1,
+      self.state.newpassword
+    );
+    let bodyParam={
+      password:newPasswordSHA1,
+      user_id:self.state.user_id
+    }
+    axios
+    .post(ChangePasswordApi,bodyParam,{
+      headers:{
+        Accept:"application/json",
+        Authorization:"Bearer " + self.state.access_token
+      }
+    })
+    .then(function(response){
+      console.log(response.data)
+    })
+    .catch(function(err){
+      console.log(err);
+    })
+  }
+   _handleOnChangePassword= async () =>{
+    var self=this;
+    const sha1password = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA1,
+      self.state.oldpassword
+    );
+    console.log(sha1password)
+    if (self.state.password == sha1password) {
+      self._handleChangePassword();
+    } else {
+      self.setState({newpassword: "" });
+      // alert("error")
+    }
+
+  }
 
   render() {
     console.log(this.state.password);
@@ -64,8 +117,11 @@ export default class Chage extends React.Component {
           />
           <TextInput
             placeholder="Old Password"
+            secureTextEntry={true}
+            value={this.state.oldpassword}
             style={styles.textInput}
             placeholderTextColor="black"
+            onChangeText={(value)=>this.setState({oldpassword:value})}
           />
         </View>
         <View style={styles.secondConatiner}>
@@ -75,22 +131,31 @@ export default class Chage extends React.Component {
           />
           <TextInput
             placeholder="New Password"
+            value={this.state.newpassword}
+            secureTextEntry={true}
             style={styles.textInput}
             placeholderTextColor="black"
+            onChangeText={(value)=>this.setState({newpassword:value})}
           />
         </View>
-        <View style={styles.secondConatiner}>
+        {/* <View style={styles.secondConatiner}>
           <Image
             source={require("@images/password.png")}
             style={{ width: 25, height: 25 }}
           />
           <TextInput
             placeholder="Retype New Password"
+            value={this.state.confirmpassword}
+            secureTextEntry={true}
             style={styles.textInput}
             placeholderTextColor="black"
+            onChangeText={(value)=>this.setState({confirmpassword:value})}
           />
-        </View>
-        <TouchableOpacity style={styles.touchBtn}>
+        </View> */}
+        <TouchableOpacity
+         style={styles.touchBtn}
+         onPress={() => this._handleOnChangePassword()}
+         >
             <Text style={styles.text}>Save</Text>
         </TouchableOpacity>
         </View>

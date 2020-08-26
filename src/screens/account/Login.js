@@ -51,7 +51,7 @@ export default class Login extends React.Component {
             },
           })
           .then(function (response) {
-            console.log("Role",response.data);
+            // console.log("Role",response.data.data.employee[0].userId);
             if (response.data.status == 1) {
              
               var role_id = response.data.data.role_id.toString();
@@ -81,6 +81,7 @@ export default class Login extends React.Component {
                 photo=response.data.data.employee[0].photo;  
                 department= response.data.data.employee[0].department.department;
                 designation= response.data.data.employee[0].designation.designation;
+                // user_id = response.data.data.employee[0].userId.toString();
 
               }
               // var employee='';
@@ -110,6 +111,8 @@ export default class Login extends React.Component {
                   ["photo",photo],
                   ["department",department],
                   ["designation",designation],
+                  // ["password",response.data.data.password],
+                  // ["user_id",user_id],
                 ],
                 (err) => {
                   if (err) {

@@ -65,11 +65,7 @@ const DRAWER_ITEMS = [
 ];
 
 const EMPLOYEE_DRAWER_ITEMS = [
-  // {
-  //   routeName: "ChangePassword",
-  //   label: "Change Password",
-  //   image: require("@images/password.png"),
-  // },
+ 
   {
     routeName:"Profile",
     label:"Profile",
@@ -80,6 +76,11 @@ const EMPLOYEE_DRAWER_ITEMS = [
     label: "Qr Scan",
     image: require("@images/qrcode.png"),
   },
+  //  {
+  //   routeName: "ChangePassword",
+  //   label: "Change Password",
+  //   image: require("@images/password.png"),
+  // },
   {
     routeName: "Logout",
     label: "Logout",

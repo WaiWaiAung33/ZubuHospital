@@ -29,3 +29,6 @@ export const QrCodeApi = BaseUrl + "employee/qrdata";
 
 //import dashboard
 export const DashboardApi = BaseUrl + "dashboard";
+
+//import changePassword
+export const ChangePasswordApi = BaseUrl + "password/reset";
